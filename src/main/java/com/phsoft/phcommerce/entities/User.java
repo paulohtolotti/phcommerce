@@ -3,6 +3,8 @@ package com.phsoft.phcommerce.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,7 +19,9 @@ public class User {
     private String phone;
     private LocalDate birthDate;
     private String password;
-    // private String[] roles;
+
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
     }
@@ -77,6 +81,10 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Order> getOrders() {
+        return this.orders;
     }
 
     @Override
