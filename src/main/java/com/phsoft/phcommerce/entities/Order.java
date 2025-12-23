@@ -3,6 +3,8 @@ package com.phsoft.phcommerce.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="tb_order")
@@ -22,6 +24,9 @@ public class Order {
 
     @OneToOne(mappedBy="order", cascade=CascadeType.ALL)
     private Payment payment;
+
+    @OneToMany(mappedBy="id.order")
+    Set<OrderItem> items = new HashSet<>();
 
     public Order(Long id, Instant moment, OrderStatus status, User client, Payment payment) {
         this.id = id;
@@ -65,6 +70,10 @@ public class Order {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public Set<OrderItem> getItems() {
+        return this.items;
     }
     @Override
     public String toString() {

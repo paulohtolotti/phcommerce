@@ -21,6 +21,10 @@ public class Product {
     @ManyToMany(mappedBy="products")
     Set<Category> categories = new HashSet<>();
 
+    @OneToMany(mappedBy="id.product")
+    Set<OrderItem> items = new HashSet<>();
+
+
     public Product(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
@@ -77,5 +81,9 @@ public class Product {
         //Checa se a categoria já existe na coleção antes de adicioanr
         if(this.categories.contains(category)) return;
         this.categories.add(category);
+    }
+
+    public Set<OrderItem> getItems() {
+        return this.items;
     }
 }
