@@ -66,11 +66,12 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "[Payment "
+        return "Payment{ "
                 + this.id
                 +", "
                 + this.moment
                 +", order"
-                + this.order.getId();
+                + this.order.getId()
+                + "}";
     }
 }
