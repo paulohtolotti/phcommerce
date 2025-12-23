@@ -3,6 +3,7 @@ package com.phsoft.phcommerce.entities;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -85,5 +86,19 @@ public class Product {
 
     public Set<OrderItem> getItems() {
         return this.items;
+    }
+
+    public List<Order> getOrders() {
+        return this.getItems().stream().map(e -> e.getOrder()).toList();
+    }
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", imgUrl='" + imgUrl + '\'' +
+                '}';
     }
 }
