@@ -1,25 +1,32 @@
 package com.phsoft.phcommerce.controller;
 
-import com.phsoft.phcommerce.entities.Product;
-import com.phsoft.phcommerce.repositories.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.phsoft.phcommerce.dto.ProductDTO;
+import com.phsoft.phcommerce.services.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/products")
 public class ProductController {
 
-    @Autowired
-    private ProductRepository productRepo;
-
-    @GetMapping
-    public String test() {
-       Optional<Product> opt = productRepo.findById(1L);
-       Product p = opt.get();
-       return p.getName() + ", " + p.getImgUrl();
+    // Inejeção de dependência no construtor do Controller
+    private ProductService service;
+    public ProductController(ProductService service) {
+        this.service = service;
     }
+
+    /**
+     * Método que recebe um id via requisição HTTP do cliente.
+     * @param id: ID do produto. Valor recebido da requisição.
+     * @return
+     */
+    @GetMapping(value = "/{id}")
+    public ProductDTO findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
+
 }
