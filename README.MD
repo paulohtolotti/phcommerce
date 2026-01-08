@@ -15,3 +15,15 @@ O backend foi projetado utilizando a arquitetura de camadas, com as seguintes:
 - Repository: realiza operações atômicas no banco de dados.
 
 A comunicação e troca de dados entre Controller e Service é feita usando DTOs, para reduzir tráfego na rede.
+
+## Checklist de atividades
+
+A lista abaixo apresenta uma visão geral das atividades do projeto que já foram realizadas,
+as que estão em andamento e os próximos passos.
+
+- Modelo de domínio e ORM: finalizado
+- API REST: em andamento
+- Exceções e validações: a realizar
+- Login e controle de acesso: a realizar
+- Homologação e CI/CD: a realizar
+
