@@ -4,8 +4,6 @@ import com.phsoft.phcommerce.dto.ProductDTO;
 import com.phsoft.phcommerce.entities.Product;
 import com.phsoft.phcommerce.repositories.ProductRepository;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -41,4 +39,25 @@ public class ProductService {
         return repository.findAll(pageable).map(x -> new ProductDTO(x));
     }
 
+    /**
+     * Insere um novo produto no banco de dados.
+     * Cria um novo Product usando os dados do ProductDTO, instanciado a partir do JSON.
+     * @param dto ProductDTO instanciado a partir do JSON do corpo da requisição.
+     * @return ProductDTO atualizado
+     */
+
+    @Transactional
+    public ProductDTO insert(ProductDTO dto) {
+
+        Product p = new Product();
+        p.setName(dto.getName());
+        p.setPrice(dto.getPrice());
+        p.setImgUrl(dto.getImgUrl());
+        p.setDescription(dto.getDescription());
+
+        // Salva a entidade no banco de dados e atualiza a referência
+        p = repository.save(p);
+
+        return new ProductDTO(p);
+    }
 }

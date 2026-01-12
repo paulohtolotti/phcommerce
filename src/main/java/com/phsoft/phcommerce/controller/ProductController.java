@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +44,17 @@ public class ProductController {
     @GetMapping
     public Page<ProductDTO> findAll(Pageable page) {
         return service.findAll(page);
+    }
+
+    /**
+     * Método que realiza a inserção de um novo produto no banco de dados.
+     * 
+     * @param dto objeto dto instanciado a partir do corpo da requisição 
+     * @return objeto dto atualizado após ser inserido no BD
+     */
+    @PostMapping
+    public ProductDTO insert(@RequestBody ProductDTO dto) {
+        return service.insert(dto);
     }
 
 
