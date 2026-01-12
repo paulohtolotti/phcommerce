@@ -1,10 +1,13 @@
 package com.phsoft.phcommerce.controller;
 
 import com.phsoft.phcommerce.dto.ProductDTO;
+import com.phsoft.phcommerce.entities.Product;
 import com.phsoft.phcommerce.services.ProductService;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,8 +40,8 @@ public class ProductController {
      * @return List<Page>: listagem paginada
      */
     @GetMapping
-    public List<ProductDTO> findAll() {
-        return service.findAll();
+    public Page<ProductDTO> findAll(Pageable page) {
+        return service.findAll(page);
     }
 
 
