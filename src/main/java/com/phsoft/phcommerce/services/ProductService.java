@@ -3,6 +3,7 @@ package com.phsoft.phcommerce.services;
 import com.phsoft.phcommerce.dto.ProductDTO;
 import com.phsoft.phcommerce.entities.Product;
 import com.phsoft.phcommerce.repositories.ProductRepository;
+import com.phsoft.phcommerce.services.exception.ResourceNotFoundException;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,8 +25,12 @@ public class ProductService {
     * @return
     */
     @Transactional(readOnly = true)
-    public ProductDTO findById(Long id) {
-        Product p = repository.findById(id).get();
+    public ProductDTO findById(Long id) throws ResourceNotFoundException {
+
+        //Tenta acessar a entidade Produto, se não acessar lança uma exceção
+        Product p = repository.findById(id).orElseThrow(
+            () -> new ResourceNotFoundException("Produto não encontrado.")
+        );
         return new ProductDTO(p);
     }
 
