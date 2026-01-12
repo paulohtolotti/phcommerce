@@ -3,11 +3,16 @@ package com.phsoft.phcommerce.services;
 import com.phsoft.phcommerce.dto.ProductDTO;
 import com.phsoft.phcommerce.entities.Product;
 import com.phsoft.phcommerce.repositories.ProductRepository;
+import com.phsoft.phcommerce.services.exception.DatabaseException;
 import com.phsoft.phcommerce.services.exception.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -66,12 +71,17 @@ public class ProductService {
      * @return
      */
     @Transactional
-    public ProductDTO update(Long id, ProductDTO dto) {
+    public ProductDTO update(Long id, ProductDTO dto) throws ResourceNotFoundException {
         //Instancia um objeto monitorado pela JPA, sem acessar o BD, apenas pega a referência.
-        Product p = repository.getReferenceById(id);
-        copyDtoToEntity(dto, p);
-        p = repository.save(p);
-        return new ProductDTO(p);
+        try {
+            Product p = repository.getReferenceById(id);
+            copyDtoToEntity(dto, p);
+            p = repository.save(p);
+            return new ProductDTO(p);
+        } catch (EntityNotFoundException err) {
+            throw new ResourceNotFoundException("Produto não encontrado");
+        }
+
     }
 
     /**
@@ -79,9 +89,20 @@ public class ProductService {
      * @param id
      * @return
      */
-    @Transactional
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
-        repository.deleteById(id);
+
+        //Checa se o recurso não existe e lança uma exceção de recurso inexistente
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("ID inexistente");
+        }
+
+        //Bloco try catch para capturar exceções de violação de integridade
+        try {
+            repository.deleteById(id);
+        } catch (DataIntegrityViolationException err) {
+            throw new DatabaseException("Não é possível deletar pois viola integridade referencial.");
+        }
     }
 
     /**
