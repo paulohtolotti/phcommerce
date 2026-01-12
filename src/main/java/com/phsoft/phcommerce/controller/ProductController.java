@@ -2,6 +2,9 @@ package com.phsoft.phcommerce.controller;
 
 import com.phsoft.phcommerce.dto.ProductDTO;
 import com.phsoft.phcommerce.services.ProductService;
+
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,16 @@ public class ProductController {
     @GetMapping(value = "/{id}")
     public ProductDTO findById(@PathVariable Long id) {
         return service.findById(id);
+    }
+
+    /**
+     * Método que faz a busca paginada de todos os produtos cadastrados.
+     * @param none 
+     * @return List<Page>: listagem paginada
+     */
+    @GetMapping
+    public List<ProductDTO> findAll() {
+        return service.findAll();
     }
 
 

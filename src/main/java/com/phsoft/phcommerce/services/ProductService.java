@@ -3,6 +3,10 @@ package com.phsoft.phcommerce.services;
 import com.phsoft.phcommerce.dto.ProductDTO;
 import com.phsoft.phcommerce.entities.Product;
 import com.phsoft.phcommerce.repositories.ProductRepository;
+
+import java.util.List;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +24,11 @@ public class ProductService {
     public ProductDTO findById(Long id) {
         Product p = repository.findById(id).get();
         return new ProductDTO(p);
+    }
+
+    @Transactional(readOnly =  true)
+    public List<ProductDTO> findAll() {
+        return repository.findAll().stream().map(x -> new ProductDTO(x)).toList();
     }
 
 }
