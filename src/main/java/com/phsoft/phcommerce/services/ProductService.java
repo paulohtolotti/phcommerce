@@ -70,6 +70,16 @@ public class ProductService {
     }
 
     /**
+     * Delete um produto a partir de seu di
+     * @param id
+     * @return
+     */
+    @Transactional
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
+    /**
      * Método auxiliar que copia os atributos de um DTO para uma entidade.
      * @param dto Objeto DTO com os dados recebidos do corpo da requisição.
      * @param p Entidade do tipo produto
