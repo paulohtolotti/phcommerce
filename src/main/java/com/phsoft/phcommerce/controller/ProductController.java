@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +29,7 @@ public class ProductController {
     }
 
     /**
-     * Método que recebe um id via requisição HTTP do cliente.
+     * Rota que recebe um id via requisição HTTP do cliente.
      * @param id: ID do produto. Valor recebido da requisição.
      * @return
      */
@@ -39,7 +40,7 @@ public class ProductController {
     }
 
     /**
-     * Método que faz a busca paginada de todos os produtos cadastrados.
+     * Rota que faz a busca paginada de todos os produtos cadastrados.
      * @param none 
      * @return List<Page>: listagem paginada
      */
@@ -50,7 +51,7 @@ public class ProductController {
     }
 
     /**
-     * Método que realiza a inserção de um novo produto no banco de dados.
+     * Rota que realiza a inserção de um novo produto no banco de dados.
      * Insere a URI do recurso criado no cabeçalho da requisição, usando o objeto URI.
      * @param dto objeto dto instanciado a partir do corpo da requisição 
      * @return objeto dto atualizado após ser inserido no BD
@@ -64,6 +65,18 @@ public class ProductController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
             .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
+    }
+
+    /**
+     * Rota que realiza o update de um produto.
+     * @param id
+     * @param dto
+     * @return
+     */
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
+        dto = service.update(id, dto);
+        return ResponseEntity.ok(dto);
     }
 
 
