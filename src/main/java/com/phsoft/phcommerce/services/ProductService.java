@@ -45,19 +45,40 @@ public class ProductService {
      * @param dto ProductDTO instanciado a partir do JSON do corpo da requisição.
      * @return ProductDTO atualizado
      */
-
     @Transactional
     public ProductDTO insert(ProductDTO dto) {
-
         Product p = new Product();
+        copyDtoToEntity(dto, p);
+
+        // Salva a entidade no banco de dados e atualiza a referência
+        p = repository.save(p);
+        return new ProductDTO(p);
+    }
+
+    /**
+     * Atualiza de maneira idempotente um produto.
+     * @param id 
+     * @return
+     */
+    @Transactional
+    public ProductDTO update(Long id, ProductDTO dto) {
+        //Instancia um objeto monitorado pela JPA, sem acessar o BD, apenas pega a referência.
+        Product p = repository.getReferenceById(id);
+        copyDtoToEntity(dto, p);
+        p = repository.save(p);
+        return new ProductDTO(p);
+    }
+
+    /**
+     * Método auxiliar que copia os atributos de um DTO para uma entidade.
+     * @param dto Objeto DTO com os dados recebidos do corpo da requisição.
+     * @param p Entidade do tipo produto
+     * @return
+     */
+    private static void copyDtoToEntity (ProductDTO dto, Product p) {
         p.setName(dto.getName());
         p.setPrice(dto.getPrice());
         p.setImgUrl(dto.getImgUrl());
         p.setDescription(dto.getDescription());
-
-        // Salva a entidade no banco de dados e atualiza a referência
-        p = repository.save(p);
-
-        return new ProductDTO(p);
     }
 }
