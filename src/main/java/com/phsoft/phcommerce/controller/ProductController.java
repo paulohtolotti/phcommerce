@@ -71,9 +71,9 @@ public class ProductController {
 
     /**
      * Rota que realiza o update de um produto.
-     * @param id
-     * @param dto
-     * @return
+     * @param id identificador único de um produto
+     * @param dto conjunto de dados a serem atualizados
+     * @return resposta para o cliente com os dados da entidade atualizados
      */
     @PutMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody ProductDTO dto) {
@@ -81,6 +81,11 @@ public class ProductController {
         return ResponseEntity.ok(dto);
     }
 
+    /**
+     * Rota que deleta uma entidade
+     * @param id identificador único do produto
+     * @return
+     */
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
