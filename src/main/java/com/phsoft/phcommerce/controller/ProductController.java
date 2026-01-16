@@ -5,6 +5,8 @@ import com.phsoft.phcommerce.services.ProductService;
 
 import java.net.URI;
 
+
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +44,7 @@ public class ProductController {
 
     /**
      * Rota que faz a busca paginada de todos os produtos cadastrados.
-     * @param none 
+     * @param
      * @return List<Page>: listagem paginada
      */
     @GetMapping
@@ -58,13 +60,12 @@ public class ProductController {
      * @return objeto dto atualizado após ser inserido no BD
      */
     @PostMapping
-    public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto) {
+    public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto) {
         dto = service.insert(dto);
 
-        //Boa prática para a resposta da criação.
-        // Insere no cabeçalho da respsota a URI do recurso
+        //Constrói a URI para ser inserida no cabeçalho da requisição
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-            .buildAndExpand(dto.getId()).toUri();
+                .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
 
@@ -75,7 +76,7 @@ public class ProductController {
      * @return
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody ProductDTO dto) {
         dto = service.update(id, dto);
         return ResponseEntity.ok(dto);
     }
