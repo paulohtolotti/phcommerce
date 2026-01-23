@@ -45,8 +45,8 @@ public class ProductService {
      * @return página de produtos DTO, que são entregues ao Controller.
      */
     @Transactional(readOnly =  true)
-    public Page<ProductDTO> findAll(Pageable pageable) {
-        return repository.findAll(pageable).map(x -> new ProductDTO(x));
+    public Page<ProductDTO> findAll(String name, Pageable pageable) {
+        return repository.searchByName(name, pageable).map(x -> new ProductDTO(x));
     }
 
     /**
