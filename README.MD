@@ -23,7 +23,7 @@ as que estão em andamento e os próximos passos.
 
 - Modelo de domínio e ORM: finalizado
 - API REST: em andamento
-- Exceções e validações: a realizar
-- Login e controle de acesso: a realizar
+- Exceções e validações: finalizado
+- Login e controle de acesso: em andamento
 - Homologação e CI/CD: a realizar
 
