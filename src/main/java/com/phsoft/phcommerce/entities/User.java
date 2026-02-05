@@ -108,6 +108,11 @@ public class User implements UserDetails {
     public void addRole(Role role) {
         roles.add(role);
     }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -128,6 +133,7 @@ public class User implements UserDetails {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", birthDate=" + birthDate +
+                ", password=" + password +
                 '}';
     }
 }
