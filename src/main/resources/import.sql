@@ -34,9 +34,7 @@ INSERT INTO tb_product (name, price, description, img_url) VALUES ('Garrafa tér
 INSERT INTO tb_product (name, price, description, img_url) VALUES ('Garrafa térmica standard', 70.0, ' irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/25-big.jpg');
 
 
-
-
-INSERT INTO tb_category_product (product_id, category_id) VALUES (1, 1);s
+INSERT INTO tb_category_product (product_id, category_id) VALUES (1, 1);
 INSERT INTO tb_category_product (product_id, category_id) VALUES (2, 2);
 INSERT INTO tb_category_product (product_id, category_id) VALUES (2, 3);
 INSERT INTO tb_category_product (product_id, category_id) VALUES (3, 3);
