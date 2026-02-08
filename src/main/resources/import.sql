@@ -63,7 +63,7 @@ INSERT INTO tb_category_product (product_id, category_id) VALUES (25, 3);
 
 INSERT INTO tb_user (name, email, phone, password, birth_date) VALUES ('Maria Brown', 'maria@gmail.com', '988888888', '$2a$12$EsK6fIL9YFKTA4JMA4JbYuaz1wABjG7uvKKdY1ZF4TJXiwOUhhXpi', '2001-07-25');
 INSERT INTO tb_user (name, email, phone, password, birth_date) VALUES ('Alex Green', 'alex@gmail.com', '977777777', '$2a$12$EsK6fIL9YFKTA4JMA4JbYuaz1wABjG7uvKKdY1ZF4TJXiwOUhhXpi', '1987-12-13');
-INSERT INTO tb_user (name, email, phone, password, birth_date) VALUES ('Maikon Izianis', 'mki@deletera.com', '91452120', '{noop}123456', '1999-11-17');
+INSERT INTO tb_user (name, email, phone, password, birth_date) VALUES ('Maikon Izianis', 'mki@deletera.com', '91452120', '$2a$12$EsK6fIL9YFKTA4JMA4JbYuaz1wABjG7uvKKdY1ZF4TJXiwOUhhXpi', '1999-11-17');
 
 INSERT INTO tb_order (moment, status, client_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 1, 1);
 INSERT INTO tb_order (moment, status, client_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-07-29T15:50:00Z', 3, 2);
