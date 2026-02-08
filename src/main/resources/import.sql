@@ -34,9 +34,7 @@ INSERT INTO tb_product (name, price, description, img_url) VALUES ('Garrafa tér
 INSERT INTO tb_product (name, price, description, img_url) VALUES ('Garrafa térmica standard', 70.0, ' irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/25-big.jpg');
 
 
-
-
-INSERT INTO tb_category_product (product_id, category_id) VALUES (1, 1);s
+INSERT INTO tb_category_product (product_id, category_id) VALUES (1, 1);
 INSERT INTO tb_category_product (product_id, category_id) VALUES (2, 2);
 INSERT INTO tb_category_product (product_id, category_id) VALUES (2, 3);
 INSERT INTO tb_category_product (product_id, category_id) VALUES (3, 3);
@@ -65,7 +63,7 @@ INSERT INTO tb_category_product (product_id, category_id) VALUES (25, 3);
 
 INSERT INTO tb_user (name, email, phone, password, birth_date) VALUES ('Maria Brown', 'maria@gmail.com', '988888888', '123456', '2001-07-25');
 INSERT INTO tb_user (name, email, phone, password, birth_date) VALUES ('Alex Green', 'alex@gmail.com', '977777777', '123456', '1987-12-13');
-INSERT INTO tb_user (name, email, phone, password, birth_date) VALUES ('Maikon Izianis', 'mki@deletera.com', '91452120', '123456', '1999-11-17');
+INSERT INTO tb_user (name, email, phone, password, birth_date) VALUES ('Maikon Izianis', 'mki@deletera.com', '91452120', '{noop}123456', '1999-11-17');
 
 INSERT INTO tb_order (moment, status, client_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 1, 1);
 INSERT INTO tb_order (moment, status, client_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-07-29T15:50:00Z', 3, 2);
@@ -79,3 +77,10 @@ INSERT INTO tb_order_item (order_id, product_id, quantity, price) VALUES (3, 1, 
 INSERT INTO tb_payment (order_id, moment) VALUES (1, TIMESTAMP WITH TIME ZONE '2022-07-25T15:00:00Z');
 INSERT INTO tb_payment (order_id, moment) VALUES (2, TIMESTAMP WITH TIME ZONE '2022-07-30T11:00:00Z');
 
+INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
+INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
+
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 2);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 2);
