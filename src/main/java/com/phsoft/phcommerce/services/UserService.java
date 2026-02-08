@@ -35,10 +35,6 @@ public class UserService implements UserDetailsService {
 
         queryResult.forEach( x -> user.addRole(new Role(x.getRoleId(),x.getAuthority())));
 
-        System.out.println(user);
-        for(Role r : user.getRoles()) {
-            System.out.println(r);
-        }
         return user;
     }
 
