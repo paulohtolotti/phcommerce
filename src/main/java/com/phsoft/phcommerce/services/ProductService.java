@@ -22,8 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProductService {
 
-    private final ProductRepository repository;
-    private final CategoryRepository categoryRepository;
+    private  ProductRepository repository;
+    private CategoryRepository categoryRepository;
 
     public ProductService(ProductRepository repository, CategoryRepository categoryRepository) {
         this.repository = repository;
@@ -42,7 +42,6 @@ public class ProductService {
         Product p = repository.findById(id).orElseThrow(
             () -> new ResourceNotFoundException("Produto não encontrado.")
         );
-
 
         return new ProductDTO(p);
 
@@ -68,16 +67,7 @@ public class ProductService {
     public ProductDTO insert(ProductDTO dto) {
         Product p = new Product();
         copyDtoToEntity(dto, p);
-
-        // Salva a entidade no banco de dados e atualiza a referência
         p = repository.save(p);
-
-        // Busca a referência no banco de dados para as categorias
-        for(CategoryDTO cdto : dto.getCategories()) {
-            Category c = categoryRepository.getReferenceById(cdto.getId());
-            p.addCategory(c);
-        }
-
         return new ProductDTO(p);
     }
 
@@ -132,5 +122,14 @@ public class ProductService {
         p.setPrice(dto.getPrice());
         p.setImgUrl(dto.getImgUrl());
         p.setDescription(dto.getDescription());
+
+        // Limpa as categorias antigas
+        p.getCategories().clear();
+        for(CategoryDTO c : dto.getCategories()) {
+            // Recuperar o nome das categorias -> categoryRepository.getReferencyById(c.getId)
+            Category cat = new Category();
+            cat.setId(c.getId());
+            p.getCategories().add(cat);
+        }
     }
 }

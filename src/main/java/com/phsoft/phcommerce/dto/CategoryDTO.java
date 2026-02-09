@@ -11,8 +11,9 @@ public class CategoryDTO {
 
     }
 
-    public CategoryDTO(Long id) {
+    public CategoryDTO(Long id, String name) {
         this.id = id;
+        this.name = name;
     }
 
     public CategoryDTO(Category entity) {
@@ -26,5 +27,13 @@ public class CategoryDTO {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "CategoryDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

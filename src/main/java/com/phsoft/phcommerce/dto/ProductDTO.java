@@ -30,6 +30,14 @@ public class ProductDTO {
 
     }
 
+    public ProductDTO(Long id, String name, String description, Double price, String imgUrl) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imgUrl = imgUrl;
+    }
+
     public ProductDTO(Product p) {
         id = p.getId();
         name = p.getName();
@@ -69,4 +77,18 @@ public class ProductDTO {
     public void addCategory(CategoryDTO categoryDTO) {
         categories.add(categoryDTO);
     }
+
+    @Override
+    public String toString() {
+        return "ProductDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", categories=" + categories +
+                '}';
+    }
+
+
 }
