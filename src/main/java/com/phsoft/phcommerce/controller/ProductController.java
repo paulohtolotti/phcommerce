@@ -1,6 +1,7 @@
 package com.phsoft.phcommerce.controller;
 
 import com.phsoft.phcommerce.dto.ProductDTO;
+import com.phsoft.phcommerce.dto.ProductMinDTO;
 import com.phsoft.phcommerce.services.ProductService;
 
 import java.net.URI;
@@ -42,9 +43,9 @@ public class ProductController {
      * @return List<Page>: listagem paginada
      */
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(
+    public ResponseEntity<Page<ProductMinDTO>> findAll(
             @RequestParam(name = "name", defaultValue = "") String name, Pageable page) {
-        Page<ProductDTO> dto =  service.findAll(name, page);
+        Page<ProductMinDTO> dto =  service.findAll(name, page);
         return ResponseEntity.ok(dto);
     }
 

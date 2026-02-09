@@ -1,6 +1,7 @@
 package com.phsoft.phcommerce.services;
 
 import com.phsoft.phcommerce.dto.ProductDTO;
+import com.phsoft.phcommerce.dto.ProductMinDTO;
 import com.phsoft.phcommerce.entities.Product;
 import com.phsoft.phcommerce.repositories.ProductRepository;
 import com.phsoft.phcommerce.services.exception.DatabaseException;
@@ -45,8 +46,8 @@ public class ProductService {
      * @return página de produtos DTO, que são entregues ao Controller.
      */
     @Transactional(readOnly =  true)
-    public Page<ProductDTO> findAll(String name, Pageable pageable) {
-        return repository.searchByName(name, pageable).map(x -> new ProductDTO(x));
+    public Page<ProductMinDTO> findAll(String name, Pageable pageable) {
+        return repository.searchByName(name, pageable).map(ProductMinDTO::new);
     }
 
     /**
