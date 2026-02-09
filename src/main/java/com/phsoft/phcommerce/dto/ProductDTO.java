@@ -3,6 +3,7 @@ package com.phsoft.phcommerce.dto;
 import com.phsoft.phcommerce.entities.Category;
 import com.phsoft.phcommerce.entities.Product;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
@@ -22,6 +23,7 @@ public class ProductDTO {
     private Double price;
     private String imgUrl;
 
+    @NotEmpty(message = "Produto deve conter, no mínimo, 1 categoria")
     List<CategoryDTO> categories = new ArrayList<>();
 
     public ProductDTO() {
