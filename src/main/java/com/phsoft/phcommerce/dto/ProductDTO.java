@@ -1,12 +1,16 @@
 package com.phsoft.phcommerce.dto;
 
+import com.phsoft.phcommerce.entities.Category;
 import com.phsoft.phcommerce.entities.Product;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+import java.util.ArrayList;
 
 public class ProductDTO {
+    
     private Long id;
     @NotBlank(message = "Não é possível cadastrar um produto sem nome.")
     @Size(min = 3, max = 80, message = "Tamanho inválido.")
@@ -18,6 +22,8 @@ public class ProductDTO {
     private Double price;
     private String imgUrl;
 
+    List<CategoryDTO> categories = new ArrayList<>();
+
     public ProductDTO() {
 
     }
@@ -28,6 +34,10 @@ public class ProductDTO {
         description = p.getDescription();
         price = p.getPrice();
         imgUrl = p.getImgUrl();
+
+        for(Category c : p.getCategories()) {
+            categories.add(new CategoryDTO(c));
+        }
     }
 
     public Long getId() {
@@ -48,5 +58,13 @@ public class ProductDTO {
 
     public String getImgUrl() {
         return imgUrl;
+    }
+
+    public List<CategoryDTO> getCategories() {
+        return categories;
+    }
+
+    public void addCategory(CategoryDTO categoryDTO) {
+        categories.add(categoryDTO);
     }
 }

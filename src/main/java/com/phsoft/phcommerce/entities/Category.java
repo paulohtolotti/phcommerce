@@ -1,5 +1,6 @@
 package com.phsoft.phcommerce.entities;
 
+import com.phsoft.phcommerce.dto.CategoryDTO;
 import jakarta.persistence.*;
 
 import java.util.HashSet;

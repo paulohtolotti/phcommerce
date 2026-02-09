@@ -1,5 +1,6 @@
 package com.phsoft.phcommerce.repositories;
 
+import com.phsoft.phcommerce.dto.ProductDTO;
 import com.phsoft.phcommerce.entities.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

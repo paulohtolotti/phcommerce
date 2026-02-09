@@ -1,8 +1,11 @@
 package com.phsoft.phcommerce.services;
 
+import com.phsoft.phcommerce.dto.CategoryDTO;
 import com.phsoft.phcommerce.dto.ProductDTO;
 import com.phsoft.phcommerce.dto.ProductMinDTO;
+import com.phsoft.phcommerce.entities.Category;
 import com.phsoft.phcommerce.entities.Product;
+import com.phsoft.phcommerce.repositories.CategoryRepository;
 import com.phsoft.phcommerce.repositories.ProductRepository;
 import com.phsoft.phcommerce.services.exception.DatabaseException;
 import com.phsoft.phcommerce.services.exception.ResourceNotFoundException;
@@ -19,10 +22,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProductService {
 
-    private ProductRepository repository;
+    private final ProductRepository repository;
+    private final CategoryRepository categoryRepository;
 
-    public ProductService(ProductRepository repository) {
+    public ProductService(ProductRepository repository, CategoryRepository categoryRepository) {
         this.repository = repository;
+        this.categoryRepository = categoryRepository;
     }
 
    /**
@@ -37,7 +42,10 @@ public class ProductService {
         Product p = repository.findById(id).orElseThrow(
             () -> new ResourceNotFoundException("Produto não encontrado.")
         );
+
+
         return new ProductDTO(p);
+
     }
 
     /**
@@ -63,6 +71,13 @@ public class ProductService {
 
         // Salva a entidade no banco de dados e atualiza a referência
         p = repository.save(p);
+
+        // Busca a referência no banco de dados para as categorias
+        for(CategoryDTO cdto : dto.getCategories()) {
+            Category c = categoryRepository.getReferenceById(cdto.getId());
+            p.addCategory(c);
+        }
+
         return new ProductDTO(p);
     }
 

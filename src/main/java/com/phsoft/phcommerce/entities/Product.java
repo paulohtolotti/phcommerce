@@ -93,7 +93,7 @@ public class Product {
     }
 
     public List<Order> getOrders() {
-        return this.getItems().stream().map(e -> e.getOrder()).toList();
+        return this.getItems().stream().map(OrderItem::getOrder).toList();
     }
     @Override
     public String toString() {
