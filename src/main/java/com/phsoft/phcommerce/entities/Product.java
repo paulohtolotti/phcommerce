@@ -20,7 +20,10 @@ public class Product {
     private Double price;
     private String imgUrl;
 
-    @ManyToMany(mappedBy="products")
+    @ManyToMany
+    @JoinTable(name="tb_category_product",
+            joinColumns=@JoinColumn(name="product_id"),
+            inverseJoinColumns=@JoinColumn(name="category_id"))
     Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy="id.product")
@@ -83,8 +86,6 @@ public class Product {
     }
 
     public void addCategory(Category category) {
-        //Checa se a categoria já existe na coleção antes de adicioanr
-        if(this.categories.contains(category)) return;
         this.categories.add(category);
     }
 
@@ -103,8 +104,10 @@ public class Product {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", imgUrl='" + imgUrl + '\'' +
+                ", categories size=" + categories.size() +
                 '}';
     }
+
 
     @Override
     public boolean equals(Object o) {

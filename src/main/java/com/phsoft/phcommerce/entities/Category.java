@@ -16,10 +16,7 @@ public class Category {
     private Long id;
     private String name;
 
-    @ManyToMany
-    @JoinTable(name="tb_category_product",
-            joinColumns=@JoinColumn(name="category_id"),
-            inverseJoinColumns=@JoinColumn(name="product_id"))
+    @ManyToMany(mappedBy = "categories")
     Set<Product> products = new HashSet<>();
 
     public Category() {
@@ -31,6 +28,10 @@ public class Category {
         this.name = name;
     }
 
+    public Category(CategoryDTO dto) {
+        id = dto.getId();
+        name = dto.getName();
+    }
     public Long getId() {
         return id;
     }
@@ -63,4 +64,14 @@ public class Category {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name +
+                '}';
+    }
+
+
 }
