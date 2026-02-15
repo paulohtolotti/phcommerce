@@ -22,8 +22,8 @@ A lista abaixo apresenta uma visão geral das atividades do projeto que já fora
 as que estão em andamento e os próximos passos.
 
 - Modelo de domínio e ORM: finalizado
-- API REST: em andamento
+- API REST: finalizado
 - Exceções e validações: finalizado
-- Login e controle de acesso: em andamento
+- Login e controle de acesso: finalizado
 - Homologação e CI/CD: a realizar
 
