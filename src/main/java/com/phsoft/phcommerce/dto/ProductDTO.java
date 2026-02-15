@@ -2,10 +2,7 @@ package com.phsoft.phcommerce.dto;
 
 import com.phsoft.phcommerce.entities.Category;
 import com.phsoft.phcommerce.entities.Product;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -19,6 +16,7 @@ public class ProductDTO {
     @Size(min = 10, message = "Descrição precisa conter no mínimo 10 caracteres.")
     @NotBlank(message = "descrição não pode estar vazia")
     private String description;
+    @NotNull(message = "Campo obrigatório.")
     @Positive(message = "Preço deve ser um valor positivo.")
     private Double price;
     private String imgUrl;

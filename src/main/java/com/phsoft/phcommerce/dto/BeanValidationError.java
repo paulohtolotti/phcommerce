@@ -14,6 +14,7 @@ public class BeanValidationError extends CustomError {
     }
 
     public void addError(FieldError fe) {
+        errors.removeIf(x -> x.getFieldName().equals(fe.getFieldName()));
         errors.add(fe);
     }
 
