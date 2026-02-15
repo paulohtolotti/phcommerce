@@ -85,6 +85,10 @@ public class Order {
         return this.getItems().stream().map(e -> e.getProduct()).toList();
     }
 
+    public void setClient(User client) {
+        this.client = client;
+    }
+
     @Override
     public String toString() {
         return "Order{" +

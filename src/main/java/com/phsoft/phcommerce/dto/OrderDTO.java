@@ -2,18 +2,27 @@ package com.phsoft.phcommerce.dto;
 
 import com.phsoft.phcommerce.entities.Order;
 import com.phsoft.phcommerce.entities.OrderItem;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDTO {
+
     private Long id;
     private Instant moment;
     private String status;
     private ClientDTO client;
     private PaymentDTO payment;
+    @NotEmpty(message = "Lista de pedidos não pode ser vazia")
+    @Valid
     private List<OrderItemDTO> items = new ArrayList<>();
+
+    public OrderDTO() {
+
+    }
 
     public OrderDTO(Long id, Instant moment, String status, ClientDTO client, PaymentDTO payment) {
         this.id = id;

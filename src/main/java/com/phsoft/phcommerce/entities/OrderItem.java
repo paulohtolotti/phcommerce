@@ -3,6 +3,8 @@ package com.phsoft.phcommerce.entities;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.util.Objects;
 
@@ -11,7 +13,7 @@ import java.util.Objects;
 public class OrderItem {
 
     @EmbeddedId
-    private OrderItemId id;
+    private OrderItemId id = new OrderItemId();
     private Integer quantity;
     private Double price;
 
@@ -20,7 +22,10 @@ public class OrderItem {
     }
 
     public OrderItem(Order order, Product product, Integer quantity, Double price) {
-        this.id = new OrderItemId(order, product);
+        id.setOrder(order);
+        id.setProduct(product);
+        this.quantity = quantity;
+        this.price = price;
     }
 
     public Integer getQuantity() {
@@ -53,6 +58,15 @@ public class OrderItem {
 
     public void setOrder(Order order) {
         this.id.setOrder(order);
+    }
+
+    public OrderItemId getId() {
+        return id;
+    }
+
+
+    public void setId(OrderItemId id) {
+        this.id = id;
     }
 
     @Override

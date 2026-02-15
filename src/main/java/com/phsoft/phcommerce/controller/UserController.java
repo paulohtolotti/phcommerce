@@ -1,6 +1,7 @@
 package com.phsoft.phcommerce.controller;
 
 import com.phsoft.phcommerce.dto.UserDTO;
+import com.phsoft.phcommerce.entities.User;
 import com.phsoft.phcommerce.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
